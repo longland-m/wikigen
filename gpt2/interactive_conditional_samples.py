@@ -104,14 +104,14 @@ def interact_model(
                          # don't want it too short
                          len(text.split()) > 50, 
                          # does it do title -> intro break correctly
-                         text.find('\n')==text.find('\n') 
+                         text.find('\n\n\n')==text.find('\n'),
+                         # does it have at least one section
+                         '==' in text
                          ]
                 # other possible rejection rules:
                 # 'list of' in title
                 # 2 or more consecutive empty sections that aren't one of:
-                  # references, see also, external links, citations
-                # 
-                
+                  # references, see also, external links, citations                
 
                 if all(rules): 
                   endIndex = text.find('<|endoftext|>')
@@ -122,11 +122,5 @@ def interact_model(
  
 if __name__ == '__main__':
     fire.Fire(interact_model)
-
-
-
-
-
-
 
 
