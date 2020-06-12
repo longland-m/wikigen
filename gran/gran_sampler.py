@@ -1,3 +1,5 @@
+# Adapted from GRAN repo, with major changes
+
 import os
 import time
 import networkx as nx
@@ -13,12 +15,13 @@ from gran.utils.train_helper import load_model
 
 
 def get_config(config_file, exp_dir=None):
+  """ Load model config file """
   config = edict(yaml.load(open(config_file, 'r'), Loader=yaml.SafeLoader))
   return config
 
 
 def get_graph(adj, undirected):
-  """ get a networkx graph from zero-padded adj """
+  """ Get a networkx graph from a zero-padded adjacency matrix """
   if undirected:
     # remove all zeros rows and columns
     adj = adj[~np.all(adj == 0, axis=1)]
@@ -32,6 +35,20 @@ def get_graph(adj, undirected):
 
 def graph_sample(model_dir, model_name, config_file, 
                  num_gen=1, batch_size=1, return_as_nx=True):
+  """ 
+  Generate graph(s) from a trained GRAN model 
+  
+  Params:
+  model_dir : the folder the model and config files are saved in
+  model_name : the name of the trained GRAN model to sample from
+  config_file : the name of the configuration file associated with the GRAN model
+  num_gen : the number of graphs to generate
+  batch_size : the number of graphs to generate per batch (1 is usually perfectly fine)
+  return_as_nx : whether to return the graphs as NetworkX Graph objects (True) 
+                 or adjacency matrices (False)
+  
+  Returns: a list containing all the generated graphs.
+  """
   
   config_path = os.path.join(model_dir, config_file)
   model_path = os.path.join(model_dir, model_name)
@@ -72,13 +89,3 @@ def graph_sample(model_dir, model_name, config_file,
     graphs_gen = A_pred
     
   return graphs_gen
-
-
-
-
-
-
-
-
-
-
