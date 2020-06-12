@@ -1,3 +1,5 @@
+# From GPT-2 repo, with no changes
+
 import argparse
 import json
 import os
