@@ -1,3 +1,5 @@
+# From GRAN repo, with minor changes
+
 import os
 import yaml
 import torch
