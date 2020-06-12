@@ -1,3 +1,5 @@
+# From GRAN repo, with minor changes
+
 import os
 import numpy as np
 import networkx as nx
