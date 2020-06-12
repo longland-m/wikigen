@@ -1,6 +1,6 @@
 # WikiGen
 
-This is the code for the [WikiGen project](http://courses.cecs.anu.edu.au/courses/CSPROJECTS/20S1/reports/u5352303_report.pdf)  for COMP3740 - Project Work in Computing, Semester 1 2020.
+This is the code for the WikiGen project, Semester 1 2020.
 
 The code uses elements from [OpenAI's GPT-2](https://github.com/openai/gpt-2), [GRAN](https://github.com/lrjconan/GRAN), and [SIF](https://github.com/PrincetonML/SIF/).
 
