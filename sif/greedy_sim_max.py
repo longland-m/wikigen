@@ -1,3 +1,7 @@
+# Functions to do the greedy similarity maximisation for article:node assignments
+# All code is original
+
+
 import random
 
 
@@ -7,7 +11,6 @@ def computeSimSum(G, similarityMatrix, asgn):
           for j in range(len(G)) for i in list(G[j])])
   return S    
       
-
 
 def greedySimilarityMax(G, similarityMatrix, nrounds=5):
   
@@ -24,15 +27,13 @@ def greedySimilarityMax(G, similarityMatrix, nrounds=5):
     # assign articles to nodes and compute initial similarity sum
     curAsgn = dict((key, init_ids[key]) for key in range(len(G)))
     curSimSum = computeSimSum(G, similarityMatrix, curAsgn)
-    #print('Initial S: ' + str(curSimSum))
     
     # maximisation loop - repeats until S can't increase 
     while True:
-      # for each edge, swap the nodes on either end and recompute similarity sum
+      # for each node pair, swap the nodes recompute similarity sum
       simSums = []    
       for edge in pairList:
         tempAsgn = dict(curAsgn)
-        # Swap nodes on either end
         tempAsgn[edge[0]] = curAsgn[edge[1]]
         tempAsgn[edge[1]] = curAsgn[edge[0]]
         # Recompute similarity sum
@@ -47,11 +48,8 @@ def greedySimilarityMax(G, similarityMatrix, nrounds=5):
         oldAsgn = dict(curAsgn)
         curAsgn[nodesToSwap[0]] = oldAsgn[nodesToSwap[1]]
         curAsgn[nodesToSwap[1]] = oldAsgn[nodesToSwap[0]]      
-        curSimSum = maxNewSimSum # no need to recompute, know the value already
-        #print('New S: ' + str(curSimSum))
-  
+        curSimSum = maxNewSimSum # no need to recompute, know the value already  
       else:
-        #print('Finished! S = ' + str(curSimSum))
         break
     
     maxSimSums.append(curSimSum)
@@ -64,15 +62,3 @@ def greedySimilarityMax(G, similarityMatrix, nrounds=5):
   return bestAsgn
       
       
-
-
-
-
-
-
-
-
-
-
-
-
