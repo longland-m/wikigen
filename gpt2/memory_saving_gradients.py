@@ -1,3 +1,5 @@
+# From GPT-2 repo, with no changes
+
 from toposort import toposort
 import contextlib
 import numpy as np
