@@ -6,7 +6,9 @@ The code uses elements from [OpenAI's GPT-2](https://github.com/openai/gpt-2), [
 
 ## Setup
 
-The code is written in Python 3.7. Install dependencies with:
+The code is written in Python 3.7. 
+
+Install dependencies with:
 ```
 $ pip install -r requirements.txt
 ```
