@@ -1,3 +1,5 @@
+# From GRAN repo, with no changes
+
 import operator
 import torch
 import warnings
