@@ -1,3 +1,5 @@
+# From GRAN repo, with minor changes
+
 import torch
 import time
 import os
