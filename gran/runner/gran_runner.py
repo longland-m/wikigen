@@ -1,3 +1,5 @@
+# From GRAN repo, with minor changes
+
 from __future__ import (division, print_function)
 import os
 import time
