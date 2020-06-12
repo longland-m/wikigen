@@ -1,3 +1,5 @@
+# From GPT-2 repo, with no changes
+
 """Byte pair encoding utilities"""
 
 import os
