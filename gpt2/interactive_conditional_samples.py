@@ -1,3 +1,5 @@
+# From GPT-2 repo, with many changes
+
 #!/usr/bin/env python3
 
 import fire
