@@ -1,3 +1,5 @@
+# From GRAN repo, with minor changes
+
 ###############################################################################
 #
 # Some code is adapted from https://github.com/JiaxuanYou/graph-generation
