@@ -1,3 +1,5 @@
+# From GPT-2 repo, with no changes
+
 import tensorflow as tf
 
 import gpt2.model as model
