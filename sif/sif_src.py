@@ -3,39 +3,10 @@ import numpy as np
 from sklearn.decomposition import TruncatedSVD
 from sklearn.metrics.pairwise import cosine_similarity
 
-
-
-
-def sentenceSimilarity(sentence1, sentence2, sentences,
-                       word_dict, word_embeddings, 
-                       word_weights, rmpc=1):
-    """ 
-    Compute the cosine similarity between two sentences in a larger list of sentences, 
-    with SIF weighting applied to the words
-    Similarity scores are between -1 and 1, a score of -1 meaning the sentences are
-    completely dissimilar, and 1 meaning the sentences are the same
-    
-    requires rmpc=0 if sentences=[sentence1, sentence2]
-
-    """
-
-    ind1 = sentences.index(sentence1)
-    ind2 = sentences.index(sentence2)
-
-    # x = array of word indices, m = binary mask indicating if there's a word there
-    x, m = sentences2idx(sentences, word_dict) 
-    w = seq2weight(x, m, word_weights) # get word weights
-    embedding = SIF_embedding(word_embeddings, x, w, rmpc) 
-
-    inner_product = (embedding[ind1] * embedding[ind2]).sum() 
-    emb1norm = np.sqrt((embedding[ind1] * embedding[ind1]).sum())
-    emb2norm = np.sqrt((embedding[ind2] * embedding[ind2]).sum())
-    similarity = inner_product / (emb1norm * emb2norm)
-
-    return similarity
+# The allSIFSimilarities function uses some code from the SIF repo
+# All other functions are taken from the SIF repo, with slight modifications and docstrings added
 
   
-
 def allSIFSimilarities(sentences, word_dict, word_embeddings, 
                        word_weights, rmpc=1):
     """ 
@@ -117,7 +88,7 @@ def SIF_embedding(We, x, w, rmpc):
 
 def getWordmap(textfile):
     """
-    ...
+    Convert the word vector file (textfile) into a word dictionary
     """
     words={}
     We = []
@@ -137,11 +108,7 @@ def getWordmap(textfile):
 
 def prepare_data(list_of_seqs):
     """ 
-    list_of_seqs = list of sentences converted to sequences of word indices
-    
-    returns: 
-      x = 
-      x_mask = binary mask
+    list_of_seqs = list of sentences that have been converted to sequences of word indices
     """
     lengths = [len(s) for s in list_of_seqs]
     n_samples = len(list_of_seqs)
@@ -153,8 +120,6 @@ def prepare_data(list_of_seqs):
         x_mask[idx, :lengths[idx]] = 1.
     x_mask = np.asarray(x_mask, dtype='float32')
     return x, x_mask
-
-
 
 
 def lookupIDX(words, w):
@@ -182,10 +147,6 @@ def seq2weight(seq, mask, weight4ind):
 
 
 def getWordWeight(weightfile, a=1e-3):
-    """ 
-    
-    """
-    
     if a <= 0: a = 1.0 # a must be > 0
     word2weight = {}
     lines = open(weightfile).readlines()
@@ -205,9 +166,6 @@ def getWordWeight(weightfile, a=1e-3):
 
 
 def getWeight(words, word2weight):
-    """
-    
-    """
     weight4ind = {}
     for word, ind in words.items():
         if word in word2weight:
@@ -230,10 +188,3 @@ def sentences2idx(sentences, words):
     seqs = [[lookupIDX(words, i) for i in s.split()] for s in sentences]
     x1, m1 = prepare_data(seqs)
     return x1, m1
-
-
-
-
-
-
-
