@@ -1,3 +1,5 @@
+# From GPT-2 repo, with no changes
+
 #!/usr/bin/env python3
 # Usage:
 #  PYTHONPATH=src ./encode.py <file|directory|glob> /path/to/output.npz
