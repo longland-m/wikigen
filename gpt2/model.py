@@ -1,3 +1,5 @@
+# From GPT-2 repo, with no changes
+
 import numpy as np
 import tensorflow as tf
 from tensorflow.contrib.training import HParams
