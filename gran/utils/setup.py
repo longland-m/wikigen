@@ -1,3 +1,5 @@
+# From GRAN repo, with no changes
+
 from distutils.core import setup, Extension
 
 orca_module = Extension('orca',
