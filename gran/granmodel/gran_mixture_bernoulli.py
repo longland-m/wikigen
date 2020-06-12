@@ -1,3 +1,5 @@
+# From GRAN repo, with minor changes
+
 import time
 import torch
 import torch.nn as nn
