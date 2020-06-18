@@ -35,7 +35,20 @@ def get_graph(adj, undirected):
 def graph_sample(model_dir, model_name, config_file, 
                  num_gen=1, batch_size=1, return_as_nx=True,
                  graph_size=None):
+  """ 
+  Generate graph(s) from a trained GRAN model 
   
+  Params:
+  model_dir : the folder the model and config files are saved in
+  model_name : the name of the trained GRAN model to sample from
+  config_file : the name of the configuration file associated with the GRAN model
+  num_gen : the number of graphs to generate
+  batch_size : the number of graphs to generate per batch (1 is usually perfectly fine)
+  return_as_nx : whether to return the graphs as NetworkX Graph objects (True) 
+                 or adjacency matrices (False)
+  
+  Returns: a list containing all the generated graphs.
+  """  
   config_path = os.path.join(model_dir, config_file)
   model_path = os.path.join(model_dir, model_name)
   
