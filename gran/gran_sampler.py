@@ -15,12 +15,13 @@ from gran.utils.train_helper import load_model
 
 
 def get_config(config_file, exp_dir=None):
+  """ Load model config file """
   config = edict(yaml.load(open(config_file, 'r'), Loader=yaml.SafeLoader))
   return config
 
 
 def get_graph(adj, undirected):
-  """ get a networkx graph from zero-padded adj """
+  """ Get a networkx graph from a zero-padded adjacency matrix """
   if undirected:
     # remove all zeros rows and columns
     adj = adj[~np.all(adj == 0, axis=1)]
@@ -46,6 +47,8 @@ def graph_sample(model_dir, model_name, config_file,
   batch_size : the number of graphs to generate per batch (1 is usually perfectly fine)
   return_as_nx : whether to return the graphs as NetworkX Graph objects (True) 
                  or adjacency matrices (False)
+  graph_size : the number of nodes the sampled graphs should have, or None
+               to randomly sample from the graph sizes seen during training
   
   Returns: a list containing all the generated graphs.
   """  
