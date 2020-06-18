@@ -1,5 +1,3 @@
-# From GRAN repo, with minor changes
-
 import time
 import torch
 import torch.nn as nn
@@ -514,22 +512,17 @@ class GRANMixtureBernoulli(nn.Module):
         loss                        if training
         list of adjacency matrices  else
     """
-    is_sampling = input_dict[
-        'is_sampling'] if 'is_sampling' in input_dict else False
-    batch_size = input_dict[
-        'batch_size'] if 'batch_size' in input_dict else None
+    is_sampling = input_dict['is_sampling'] if 'is_sampling' in input_dict else False
+    batch_size = input_dict['batch_size'] if 'batch_size' in input_dict else None
     A_pad = input_dict['adj'] if 'adj' in input_dict else None
-    node_idx_gnn = input_dict[
-        'node_idx_gnn'] if 'node_idx_gnn' in input_dict else None
-    node_idx_feat = input_dict[
-        'node_idx_feat'] if 'node_idx_feat' in input_dict else None
+    node_idx_gnn = input_dict['node_idx_gnn'] if 'node_idx_gnn' in input_dict else None
+    node_idx_feat = input_dict['node_idx_feat'] if 'node_idx_feat' in input_dict else None
     att_idx = input_dict['att_idx'] if 'att_idx' in input_dict else None
-    subgraph_idx = input_dict[
-        'subgraph_idx'] if 'subgraph_idx' in input_dict else None
+    subgraph_idx = input_dict['subgraph_idx'] if 'subgraph_idx' in input_dict else None
     edges = input_dict['edges'] if 'edges' in input_dict else None
     label = input_dict['label'] if 'label' in input_dict else None
-    num_nodes_pmf = input_dict[
-        'num_nodes_pmf'] if 'num_nodes_pmf' in input_dict else None
+    num_nodes_pmf = input_dict['num_nodes_pmf'] if 'num_nodes_pmf' in input_dict else None
+    graph_size = input_dict['graph_size'] if 'graph_size' in input_dict else None
 
     N_max = self.max_num_nodes
 
@@ -554,10 +547,12 @@ class GRANMixtureBernoulli(nn.Module):
     else:
       A = self._sampling(batch_size)
 
-      ### sample number of nodes
+      # number of nodes - either sampled or supplied in graph_size param
       num_nodes_pmf = torch.from_numpy(num_nodes_pmf).to(self.device)
-      num_nodes = torch.multinomial(
-          num_nodes_pmf, batch_size, replacement=True) + 1  # shape B X 1
+      if graph_size is None:
+        num_nodes = torch.multinomial(num_nodes_pmf, batch_size, replacement=True) + 1  # shape B X 1
+      else:
+        num_nodes = torch.tensor([graph_size] * batch_size)
 
       A_list = [
           A[ii, :num_nodes[ii], :num_nodes[ii]] for ii in range(batch_size)
