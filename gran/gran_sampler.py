@@ -48,7 +48,9 @@ def graph_sample(model_dir, model_name, config_file,
   return_as_nx : whether to return the graphs as NetworkX Graph objects (True) 
                  or adjacency matrices (False)
   graph_size : the number of nodes the sampled graphs should have, or None
-               to randomly sample from the graph sizes seen during training
+               to randomly sample from the graph sizes seen during training.
+               Must be an integer, and no larger than the largest graph the
+               model was trained on.
   
   Returns: a list containing all the generated graphs.
   """  
