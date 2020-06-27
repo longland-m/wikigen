@@ -1,6 +1,6 @@
 # WikiGen
 
-This is the code for the WikiGen project, Semester 1 2020.
+This is the code for the [WikiGen project](http://courses.cecs.anu.edu.au/courses/CSPROJECTS/20S1/reports/u5352303_report.pdf), Semester 1 2020.
 
 The code uses elements from [OpenAI's GPT-2](https://github.com/openai/gpt-2), [GRAN](https://github.com/lrjconan/GRAN), and [SIF](https://github.com/PrincetonML/SIF/).
 
@@ -13,7 +13,7 @@ Install dependencies with:
 $ pip install -r requirements.txt
 ```
 
-Two other files are also required. 
+Two other files are required. 
 
 SIF requires paragram_sl999_small.txt. Run `setup.sh` to download and save it to the SIF folder.
 
@@ -24,3 +24,5 @@ Unzip it and place the `smallWikiPages` folder in the `gpt2/models` folder. Due 
 ## Run Demo
 
 The `example_run.ipynb` shows a demo of the WikiGen model.
+
+
