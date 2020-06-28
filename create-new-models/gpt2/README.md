@@ -3,9 +3,6 @@
 Finetuning from the command line.
 
 
-Still to add: code for getting data from the Wikipedia API and formatting it similar to how it was done in my report
-
-
 ### Setup
 
 `cd` into this folder.
